@@ -1,11 +1,8 @@
 'use client';
 
-import TableData from "@/components/TableData/TableData";
-import GenerateJob from '@/components/GenerateJob/GenerateJob';
-
-
 import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import Link from "next/link";
 
 export default function Home() {
 
@@ -15,7 +12,13 @@ export default function Home() {
 
   const handleMagicLink = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithOtp({ email });
+    const { error } = await supabase.auth.signInWithOtp({
+      email, options: {
+        // emailRedirectTo: 'http://localhost:3000/dashboard'
+        emailRedirectTo: `${window.location.origin}/callback`
+      }
+    });
+
     setLoading(false);
 
     if (error) {
@@ -47,6 +50,8 @@ export default function Home() {
         </button>
         {message && <p className="mt-4 text-green-600">{message}</p>}
       </div>
+
+      <Link href="/test">Link to test Page</Link>
     </div>
   );
 }

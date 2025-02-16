@@ -25,8 +25,6 @@ export default function AddTodo() {
         fetchItemCount()
     }, [jobDescription])
 
-    console.log("Total Items: ", totalItems)
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);

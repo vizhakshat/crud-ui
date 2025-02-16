@@ -9,7 +9,6 @@ export default function TableData() {
     const [editText, setEditText] = useState('');
 
     const fetchUsers = async () => {
-        console.log("fetch users execution begin...");
         const { data, error } = await supabase.from('generate_job').select('*').order('id', { ascending: true });;
         if (error) {
             console.error('Error fetching users:', error);
